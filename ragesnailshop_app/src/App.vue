@@ -1,10 +1,19 @@
 <template>
-    <div>这里是根组件</div>
+    <div>
+        <Headers></Headers>
+        <Footers></Footers>
+    </div>
 </template>
 
 <script>
+import Headers from "./components/Header"
+import Footers from "./components/Footer"
 export default {
-    name:"App"
+    name:"App",
+    components:{
+        Headers,
+        Footers,
+    }
 }
 </script>
 
