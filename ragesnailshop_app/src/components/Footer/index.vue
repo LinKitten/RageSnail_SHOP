@@ -106,7 +106,6 @@ export default {
 <style lang="less" scoped>
    .footer {
         background-color: #eaeaea;
-
         .footer-container {
             width: 1200px;
             margin: 0 auto;
