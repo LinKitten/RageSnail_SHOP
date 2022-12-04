@@ -43,7 +43,12 @@
 
 <script>
 export default {
-    name: "Headers"
+    name: "Headers",
+    data() {
+        return {
+            
+        }
+    },
 };
 </script>
 
