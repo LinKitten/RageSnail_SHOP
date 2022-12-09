@@ -29,13 +29,15 @@
         <div class="bottom">
             <h1 class="logoArea">
                 <router-link class="logo" to="/home">
-                    <img src="../../assets/images/logo.png" alt="">
+                    <img src="../../assets/images/logo.png" alt="" />
                 </router-link>
             </h1>
             <div class="searchArea">
                 <form action="###" class="searchForm">
-                    <input type="text" id="autocomplete" class="input-error input-xxlarge" />
-                    <button class="sui-btn btn-xlarge btn-danger" type="button" @click="goSearch">搜索</button>
+                    <input type="text" id="autocomplete" class="input-error input-xxlarge" v-model="keyword" />
+                    <button class="sui-btn btn-xlarge btn-danger" type="button" @click="goSearch">
+                        搜索
+                    </button>
                 </form>
             </div>
         </div>
@@ -45,12 +47,73 @@
 <script>
 export default {
     name: "Headers",
-    methods:{
+    data() {
+        return {
+            keyword: "",
+        };
+    },
+    methods: {
         // 搜索按钮的回调函数： 需要像search路由进行跳转
-        goSearch(){
-            this.$router.push("/search")
-        }
-    }
+        goSearch() {
+            // 路由传递参数：
+            // 第一种方法：字符串形式
+            //   this.$router.push("/search/"+this.keyword+"?k="+this.keyword.toUpperCase());
+            // 第二种方法：模板字符串的方法
+            // this.$router.push(`/search/${this.keyword}?k=${this.keyword.toUpperCase()}`)
+            // 第三种写法：对象
+            /*  this.$router.push({
+                 name: "search",
+                 params: {keyword: this.keyword,},
+                 query: {k: this.keyword.toUpperCase(),}
+             }); */
+
+            /* ------------------------------------------------------------------------------------------------------------------------------- */
+            /* 面试题1：路由传递参数（对象写法）path是否可以结合params参数一起使用? 
+
+                答：路由跳转传参的时候，对象的写法可是name、path形式，但是需要注意的是：path这种写法不能和params参数一起使用
+            
+            */
+            /* this.$router.push({
+                path: "/search",
+                params: {keyword: this.keyword,},
+                query: {k: this.keyword.toUpperCase(),}
+            }) */
+
+            /* 面试题2：如何指定params参数可传可不传？ 
+
+                答：如果路由要求传递params参数，但是我们就不传递params参数，URL就会哟问题
+
+                面试题目：2.2 如何指定params参数可以传递，或者可以不传递？
+
+                答:在配置路由的时候，在占位的后面加上一个问号【params可传可不传】
+            */
+            /*  this.$router.push({
+                 name: "search",
+                 query: {k: this.keyword.toUpperCase(),}
+             }) */
+
+            /* 面试题3：params参数可以传递也可以不传递，但是如果传递是空串，如何解决？
+
+                答：使用undefined解决：可以传递也可以不传递（空的字符串）
+            
+            */
+            /* this.$router.push({
+                 name:"search",
+                 params:{keyword:''|| undefined},
+                 query:{k:this.keyword.toUpperCase(),}
+            }) */
+
+            /*面试题4： 路由组件能不能传递props数据？
+            
+                 答：可以的，有三种写法
+             */
+            this.$router.push({
+                name: "search",
+                params: { keyword: this.keyword, },
+                query: { k: this.keyword.toUpperCase(), }
+            });
+        },
+    },
 };
 </script>
 
@@ -91,9 +154,7 @@ export default {
                         border-left: 1px solid #b3aeae;
                     }
                 }
-
             }
-
         }
     }
 
@@ -114,7 +175,7 @@ export default {
         }
 
         .searchArea {
-            float: right;   
+            float: right;
             margin-top: 35px;
 
             .searchForm {
@@ -125,7 +186,7 @@ export default {
                     width: 490px;
                     height: 32px;
                     padding: 0px 4px;
-                    border: 2px solid #ea4a36;
+                    border: 2px solid #f9782a;
                     float: left;
 
                     &:focus {
@@ -136,7 +197,7 @@ export default {
                 button {
                     height: 32px;
                     width: 68px;
-                    background-color: #ea4a36;
+                    background-color: #f9782a;
                     border: none;
                     color: #fff;
                     float: left;
