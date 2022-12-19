@@ -55,6 +55,7 @@ export default {
     methods: {
         // 搜索按钮的回调函数： 需要像search路由进行跳转
         goSearch() {
+            //#region 
             // 路由传递参数：
             // 第一种方法：字符串形式
             //   this.$router.push("/search/"+this.keyword+"?k="+this.keyword.toUpperCase());
@@ -102,6 +103,7 @@ export default {
                  params:{keyword:''|| undefined},
                  query:{k:this.keyword.toUpperCase(),}
             }) */
+            //#endregion
 
             /*面试题4： 路由组件能不能传递props数据？
             
@@ -111,7 +113,9 @@ export default {
                 name: "search",
                 params: { keyword: this.keyword, },
                 query: { k: this.keyword.toUpperCase(), }
-            });
+            }
+           );
+           console.log(this.$router);
         },
     },
 };

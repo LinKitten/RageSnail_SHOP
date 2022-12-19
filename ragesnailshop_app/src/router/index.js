@@ -10,6 +10,25 @@ import Home from '@/pages/Home'
 import Search from '@/pages/Search'
 import Login from '@/pages/Login'
 import Register from '@/pages/Register'
+// console.log(VueRouter);
+// 先把VueRouter原型對象的push保存一份
+let originPush = VueRouter.prototype.push;
+
+//重写push|replace
+// 第一个参数：告诉原来的push方法，你往哪里跳转（传递哪些参数）
+/* `call||apply区别
+           相同点：都可以调用函数一次，都可以篡改函数的上下文一次
+           不同点: call与apply传递参数：call传递参数用逗号隔开，apply方法执行，传递数组
+       */
+VueRouter.prototype.push = function (location, resolve, reject) {
+    if (resolve && reject) {
+
+        originPush.call(this, location, resolve, reject);
+    } else {
+        originPush.call(this, location, () => { }, () => { });
+
+    }
+}
 
 // 配置路由
 export default new VueRouter({
@@ -36,8 +55,8 @@ export default new VueRouter({
             /* props:{a:1,b:"ppppp"} */
             // 3: 函数 可以params参数、query参数，通过props传递给路由组件
             porps: ($route) => ({
-                    keyword: $route.params.keyword,
-                    k: $route.query.k,
+                keyword: $route.params.keyword,
+                k: $route.query.k,
             })
         },
         {
