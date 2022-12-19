@@ -134,8 +134,10 @@ http://localhost:8080/#/search?k=ABC
 ​          k: $route.query.k,
 
 ​      })
+   **6: call||apply区别**
 
-
+           相同点：都可以调用函数一次，都可以篡改函数的上下文一次
+           不同点: call与apply传递参数：call传递参数用逗号隔开，apply方法执行，传递数组
 
 
 
