@@ -13,6 +13,7 @@ import Register from '@/pages/Register'
 // console.log(VueRouter);
 // 先把VueRouter原型對象的push保存一份
 let originPush = VueRouter.prototype.push;
+let originReplace = VueRouter.prototype.replace;
 
 //重写push|replace
 // 第一个参数：告诉原来的push方法，你往哪里跳转（传递哪些参数）
@@ -22,10 +23,17 @@ let originPush = VueRouter.prototype.push;
        */
 VueRouter.prototype.push = function (location, resolve, reject) {
     if (resolve && reject) {
-
         originPush.call(this, location, resolve, reject);
     } else {
         originPush.call(this, location, () => { }, () => { });
+
+    }
+}
+VueRouter.prototype.replace = function (location, resolve, reject) {
+    if (resolve && reject) {  
+        originReplace.call(this, location, resolve, reject);
+    } else {
+        originReplace.call(this, location, () => { }, () => { });
 
     }
 }
