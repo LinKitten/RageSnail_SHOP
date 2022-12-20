@@ -8,6 +8,8 @@
     <ListContainer />
     <!-- 今日推荐 -->
     <Recommend />
+    <!-- 商品排行 -->
+    <Rank/>
 
   </div>
 </template>
@@ -16,11 +18,13 @@
 // 引入其余的组件
 import ListContainer from "@/pages/Home/ListContainer"
 import Recommend from "@/pages/Home/Recommend"
+import Rank from "@/pages/Home/Rank"
 export default {
   name: "Home",
   components: {
     ListContainer,
     Recommend,
+    Rank,
   }
 }
 </script>
