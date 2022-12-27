@@ -39,7 +39,10 @@ export default {
     Like,
     Floor,
     Brand,
-  }
+  },
+  mounted() {
+    
+  },
 }
 </script>
 
