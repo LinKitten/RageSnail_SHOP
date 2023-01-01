@@ -10,10 +10,6 @@ Vue.component(TypeNav.name,TypeNav)
 //引入路由配置文件
 import router from "@/router"
 // Vue.config.productionTip = false
-// 测试api
-import {reCategoryList} from "@/api";
-reCategoryList();
-
 // 引入仓库
 import store from '@/store'
 new Vue({

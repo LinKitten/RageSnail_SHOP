@@ -6,7 +6,7 @@ import requests from "./request";
     /api/product/getBaseCategoryList
     get 无参数
 */
-export const reCategoryList = () => requests({ url: '/product/getBaseCategoryList', method: 'get' });
+export const reqCategoryList = () => requests({ url: '/product/getBaseCategoryList', method: 'get' });
     // 发请求 :axois发请求返回结果是pormise对象
 /*     return requests({ 
         url: '/product/getBaseCategoryList', 
