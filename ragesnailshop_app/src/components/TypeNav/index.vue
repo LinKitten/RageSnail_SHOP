@@ -51,6 +51,11 @@
 
 <script>
 import { mapState } from 'vuex';
+// 引入方式：是将lodash全部引入
+// import _ from 'lodash';
+// lodash按需引入
+import throttle from 'lodash/throttle'
+
 export default {
     name: "TypeNav",
     data() {
@@ -72,11 +77,17 @@ export default {
         })
     },
     methods: {
+        
+
         //鼠标进入修改响应式数据currentIndex属性
-        changeIndex(index) {
+      /*   changeIndex(index) {
             // indez鼠标移上某一个一级分类上
             this.currentIndex = index;
-        },
+        }, */
+        // 三级联动节流
+        changeIndex:throttle(function(index){
+            this.currentIndex = index;
+        },50),
         // 一级分类鼠标移出事件回调
         leaveIndex() {
             // 鼠标移除
@@ -105,6 +116,7 @@ export default {
             color: #fff;
             font-size: 14px;
             font-weight: bold;
+            
         }
 
         .nav {
@@ -130,7 +142,7 @@ export default {
             .all-sort-list2 {
                 .item {
                     h3 {
-                        line-height: 30px;
+                        line-height: 28px;
                         font-size: 14px;
                         font-weight: 400;
                         overflow: hidden;
