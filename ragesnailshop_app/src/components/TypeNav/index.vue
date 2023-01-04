@@ -11,7 +11,8 @@
                             <h3 @mouseenter="changeIndex(index)" >
                                 <a href="">{{ itemCate1.categoryName }}</a>
                             </h3>
-                            <div class="item-list clearfix">
+                            <!-- 二级、三级分类 -->
+                            <div class="item-list clearfix" :style="{display:currentIndex == index?'block':'none'}">
                                 <div class="subitem" v-for="itemCate2 in itemCate1.categoryChild"
                                     :key="itemCate2.categoryId">
                                     <dl class="fore">
@@ -195,11 +196,11 @@ export default {
                         }
                     }
 
-                    &:hover {
-                        .item-list {
-                            display: block;
-                        }
-                    }
+                    // &:hover {
+                    //     .item-list {
+                    //         display: block;
+                    //     }
+                    // }
                 }
 
                 .cur {
