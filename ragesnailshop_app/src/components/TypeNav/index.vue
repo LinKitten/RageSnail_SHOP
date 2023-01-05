@@ -9,7 +9,8 @@
                         <div class="item" v-for="(itemCate1, index) in categoryList" :key="itemCate1.categoryId"
                             :class="{ cur: currentIndex == index }">
                             <h3 @mouseenter="changeIndex(index)" >
-                                <a href="">{{ itemCate1.categoryName }}</a>
+                                <!-- <a href="">{{ itemCate1.categoryName }}</a> -->
+                                <router-link to="/search">{{ itemCate1.categoryName }}</router-link>
                             </h3>
                             <!-- 二级、三级分类 -->
                             <div class="item-list clearfix" :style="{display:currentIndex == index?'block':'none'}">
@@ -17,12 +18,14 @@
                                     :key="itemCate2.categoryId">
                                     <dl class="fore">
                                         <dt>
-                                            <a href="">{{ itemCate2.categoryName }}</a>
+                                            <!-- <a href="">{{ itemCate2.categoryName }}</a> -->
+                                            <router-link to="/search">{{ itemCate2.categoryName }}</router-link>
                                         </dt>
                                         <dd>
                                             <em v-for="itemCate3 in itemCate2.categoryChild"
                                                 :key="itemCate3.categoryId">
-                                                <a href="">{{ itemCate3.categoryName }}</a>
+                                                <!-- <a href="">{{ itemCate3.categoryName }}</a> -->
+                                                <router-link to="/search">{{ itemCate3.categoryName }}</router-link>
                                             </em>
 
                                         </dd>
