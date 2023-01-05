@@ -5,27 +5,30 @@
             <div @mouseleave="leaveIndex">
                 <h2 class="all">全部商品分类</h2>
                 <div class="sort">
-                    <div class="all-sort-list2">
+                    <!-- 编程式导航+事件委派：实现路由跳转 -->
+                    <div class="all-sort-list2" @click="goSearch">
                         <div class="item" v-for="(itemCate1, index) in categoryList" :key="itemCate1.categoryId"
                             :class="{ cur: currentIndex == index }">
-                            <h3 @mouseenter="changeIndex(index)" >
-                                <!-- <a href="">{{ itemCate1.categoryName }}</a> -->
-                                <router-link to="/search">{{ itemCate1.categoryName }}</router-link>
+                            <h3 @mouseenter="changeIndex(index)">
+                                <a :data-categoryName="itemCate1.categoryName"
+                                    :data-categoryId="itemCate1.categoryId">{{ itemCate1.categoryName }}</a>
                             </h3>
                             <!-- 二级、三级分类 -->
-                            <div class="item-list clearfix" :style="{display:currentIndex == index?'block':'none'}">
+                            <div class="item-list clearfix" :style="{ display: currentIndex == index ? 'block' : 'none' }">
                                 <div class="subitem" v-for="itemCate2 in itemCate1.categoryChild"
                                     :key="itemCate2.categoryId">
                                     <dl class="fore">
                                         <dt>
-                                            <!-- <a href="">{{ itemCate2.categoryName }}</a> -->
-                                            <router-link to="/search">{{ itemCate2.categoryName }}</router-link>
+                                            <a :data-categoryName="itemCate2.categoryName"
+                                                :data-categoryId="itemCate2.categoryId">{{ itemCate2.categoryName }}</a>
                                         </dt>
                                         <dd>
                                             <em v-for="itemCate3 in itemCate2.categoryChild"
                                                 :key="itemCate3.categoryId">
-                                                <!-- <a href="">{{ itemCate3.categoryName }}</a> -->
-                                                <router-link to="/search">{{ itemCate3.categoryName }}</router-link>
+                                                <a :data-categoryName="itemCate3.categoryName"
+                                                    :data-categoryId="itemCate3.categoryId">{{
+    itemCate3.categoryName
+                                                    }}</a>
                                             </em>
 
                                         </dd>
@@ -80,21 +83,44 @@ export default {
         })
     },
     methods: {
-        
-
         //鼠标进入修改响应式数据currentIndex属性
-      /*   changeIndex(index) {
-            // indez鼠标移上某一个一级分类上
-            this.currentIndex = index;
-        }, */
+        /*   changeIndex(index) {
+              // indez鼠标移上某一个一级分类上
+              this.currentIndex = index;
+          }, */
         // 三级联动节流
-        changeIndex:throttle(function(index){
+        changeIndex: throttle(function (index) {
             this.currentIndex = index;
-        },50),
+        }, 50),
         // 一级分类鼠标移出事件回调
         leaveIndex() {
             // 鼠标移除
             this.currentIndex = -1;
+        },
+        // 进行路由跳转的方法
+        goSearch(event) {
+            // this.$router.push('/search')
+            // 最好的解决方法：编程式导航+事件委派
+            // 解决第一个问题：把子节点当中a标签，加上自定义属性data-categoryName，其余子节点是没有的
+            let element = event.target;
+            // 获取当前发出事件的带有data-categoryName的节点
+            let { categoryname, category1id, category2id, category3id } = element.dataset;
+            if (categoryname) { //a标签
+                // 整理路由跳转的参数
+                let location = { name: 'search' };
+                let query = { categoryName: categoryname }
+                // 区别是一级二级还是三级
+                if (category1id) {
+                    query.category1Id = category1id;
+                } else if (category2id) {
+                    query.category2Id = category2id;
+                } else {
+                    query.category3Id = category3id;
+                }
+                location.query = query;
+                // 路由跳转
+                this.$router.push(location);
+            }
         }
     }
 }
@@ -119,7 +145,7 @@ export default {
             color: #fff;
             font-size: 14px;
             font-weight: bold;
-            
+
         }
 
         .nav {
