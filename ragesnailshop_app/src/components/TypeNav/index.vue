@@ -4,7 +4,7 @@
         <div class="container">
             <div @mouseleave="leaveIndex">
                 <h2 class="all">全部商品分类</h2>
-                <div class="sort">
+                <div class="sort" v-show="show">
                     <!-- 编程式导航+事件委派：实现路由跳转 -->
                     <div class="all-sort-list2" @click="goSearch">
                         <div class="item" v-for="(itemCate1, index) in categoryList" :key="itemCate1.categoryId"
@@ -68,12 +68,19 @@ export default {
         return {
             // 存储用户鼠标移上哪一个一级分类
             currentIndex: -1,
+            show:true,
         }
     },
     // 组件挂载完毕，可以向服务器发请求
     mounted() {
         // t通知Vuex发请求，获取数据，存储于仓库当中
         this.$store.dispatch('categoryList');
+        // 当组件挂载完毕，改变show为false
+        // 如果不是Home路由组件，将TypeNav进行隐藏
+        if(this.$route.path!='/home'){
+            this.show = false;
+        }
+        
     },
     computed: {
         ...mapState({
