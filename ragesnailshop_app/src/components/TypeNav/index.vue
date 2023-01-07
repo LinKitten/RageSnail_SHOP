@@ -2,7 +2,7 @@
     <!-- 商品分类导航 -->
     <div class="type-nav">
         <div class="container">
-            <div @mouseleave="leaveIndex">
+            <div @mouseleave="leaveShow" @mouseenter="enterShow">
                 <h2 class="all">全部商品分类</h2>
                 <div class="sort" v-show="show">
                     <!-- 编程式导航+事件委派：实现路由跳转 -->
@@ -14,7 +14,8 @@
                                     :data-categoryId="itemCate1.categoryId">{{ itemCate1.categoryName }}</a>
                             </h3>
                             <!-- 二级、三级分类 -->
-                            <div class="item-list clearfix" :style="{ display: currentIndex == index ? 'block' : 'none' }">
+                            <div class="item-list clearfix"
+                                :style="{ display: currentIndex == index ? 'block' : 'none' }">
                                 <div class="subitem" v-for="itemCate2 in itemCate1.categoryChild"
                                     :key="itemCate2.categoryId">
                                     <dl class="fore">
@@ -68,7 +69,7 @@ export default {
         return {
             // 存储用户鼠标移上哪一个一级分类
             currentIndex: -1,
-            show:true,
+            show: true,
         }
     },
     // 组件挂载完毕，可以向服务器发请求
@@ -77,10 +78,10 @@ export default {
         this.$store.dispatch('categoryList');
         // 当组件挂载完毕，改变show为false
         // 如果不是Home路由组件，将TypeNav进行隐藏
-        if(this.$route.path!='/home'){
+        if (this.$route.path != '/home') {
             this.show = false;
         }
-        
+
     },
     computed: {
         ...mapState({
@@ -99,11 +100,6 @@ export default {
         changeIndex: throttle(function (index) {
             this.currentIndex = index;
         }, 50),
-        // 一级分类鼠标移出事件回调
-        leaveIndex() {
-            // 鼠标移除
-            this.currentIndex = -1;
-        },
         // 进行路由跳转的方法
         goSearch(event) {
             // this.$router.push('/search')
@@ -128,7 +124,20 @@ export default {
                 // 路由跳转
                 this.$router.push(location);
             }
-        }
+        },
+        // 将鼠标移入的时候，让商品分类类别进行展示
+        enterShow() {
+            this.show = true;
+        },
+        // 一级分类鼠标移出事件回调
+        leaveShow() {
+            this.currentIndex = -1;
+            // 鼠标移除
+            if (this.$route.path != '/home') {
+                this.show = false;
+            }
+
+        },
     }
 }
 </script>
