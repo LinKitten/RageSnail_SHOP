@@ -4,42 +4,47 @@
         <div class="container">
             <div @mouseleave="leaveShow" @mouseenter="enterShow">
                 <h2 class="all">全部商品分类</h2>
-                <div class="sort" v-show="show">
-                    <!-- 编程式导航+事件委派：实现路由跳转 -->
-                    <div class="all-sort-list2" @click="goSearch">
-                        <div class="item" v-for="(itemCate1, index) in categoryList" :key="itemCate1.categoryId"
-                            :class="{ cur: currentIndex == index }">
-                            <h3 @mouseenter="changeIndex(index)">
-                                <a :data-categoryName="itemCate1.categoryName"
-                                    :data-categoryId="itemCate1.categoryId">{{ itemCate1.categoryName }}</a>
-                            </h3>
-                            <!-- 二级、三级分类 -->
-                            <div class="item-list clearfix"
-                                :style="{ display: currentIndex == index ? 'block' : 'none' }">
-                                <div class="subitem" v-for="itemCate2 in itemCate1.categoryChild"
-                                    :key="itemCate2.categoryId">
-                                    <dl class="fore">
-                                        <dt>
-                                            <a :data-categoryName="itemCate2.categoryName"
-                                                :data-categoryId="itemCate2.categoryId">{{ itemCate2.categoryName }}</a>
-                                        </dt>
-                                        <dd>
-                                            <em v-for="itemCate3 in itemCate2.categoryChild"
-                                                :key="itemCate3.categoryId">
-                                                <a :data-categoryName="itemCate3.categoryName"
-                                                    :data-categoryId="itemCate3.categoryId">{{
-    itemCate3.categoryName
+                <!-- 过渡动画 -->
+                <transition name="sort">
+                    <div class="sort" v-show="show">
+                        <!-- 编程式导航+事件委派：实现路由跳转 -->
+                        <div class="all-sort-list2" @click="goSearch">
+                            <div class="item" v-for="(itemCate1, index) in categoryList" :key="itemCate1.categoryId"
+                                :class="{ cur: currentIndex == index }">
+                                <h3 @mouseenter="changeIndex(index)">
+                                    <a :data-categoryName="itemCate1.categoryName"
+                                        :data-categoryId="itemCate1.categoryId">{{ itemCate1.categoryName }}</a>
+                                </h3>
+                                <!-- 二级、三级分类 -->
+                                <div class="item-list clearfix"
+                                    :style="{ display: currentIndex == index ? 'block' : 'none' }">
+                                    <div class="subitem" v-for="itemCate2 in itemCate1.categoryChild"
+                                        :key="itemCate2.categoryId">
+                                        <dl class="fore">
+                                            <dt>
+                                                <a :data-categoryName="itemCate2.categoryName"
+                                                    :data-categoryId="itemCate2.categoryId">{{
+                                                        itemCate2.categoryName
                                                     }}</a>
-                                            </em>
+                                            </dt>
+                                            <dd>
+                                                <em v-for="itemCate3 in itemCate2.categoryChild"
+                                                    :key="itemCate3.categoryId">
+                                                    <a :data-categoryName="itemCate3.categoryName"
+                                                        :data-categoryId="itemCate3.categoryId">{{
+    itemCate3.categoryName
+                                                        }}</a>
+                                                </em>
 
-                                        </dd>
-                                    </dl>
+                                            </dd>
+                                        </dl>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
-                </div>
+                </transition>
             </div>
             <nav class="nav">
                 <a href="###">服装城</a>
@@ -264,6 +269,18 @@ export default {
                     background-color: #f5620099;
                 }
             }
+        }
+        // 过渡动画的样式
+        // 过渡动画开始状态（进入）
+        .sort-enter{
+            height: 0px;
+        }
+        // 过渡动画结束状态（进入）
+        .sort-enter-to{
+            height: 461px;
+        }
+        .sort-enter-active{
+            transition: all .5s linear;
         }
     }
 }
