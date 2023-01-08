@@ -79,8 +79,7 @@ export default {
     },
     // 组件挂载完毕，可以向服务器发请求
     mounted() {
-        // t通知Vuex发请求，获取数据，存储于仓库当中
-        this.$store.dispatch('categoryList');
+      
         // 当组件挂载完毕，改变show为false
         // 如果不是Home路由组件，将TypeNav进行隐藏
         if (this.$route.path != '/home') {

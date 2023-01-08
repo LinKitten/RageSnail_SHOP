@@ -16,6 +16,10 @@ export default {
     components:{
         Headers,
         Footers,
+    },
+    mounted(){
+          //派发一个action|| 通知Vuex发请求，获取三级分类的数据，存储于仓库当中
+          this.$store.dispatch('categoryList');
     }
 }
 </script>
