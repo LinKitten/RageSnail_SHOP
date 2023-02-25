@@ -4,7 +4,15 @@
 
 <script>
 export default {
-    nanme:"Register"
+    nanme:"Register",
+    data() {
+      return {
+        
+      }
+    },
+    mounted() {
+      
+    },
 }
 </script>
 
