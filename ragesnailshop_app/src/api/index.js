@@ -13,4 +13,6 @@ export const reqCategoryList = () => requests({ url: '/product/getBaseCategoryLi
         method:'get',
     }) */
 
+export const reqGetBannerList = () => requests({ url: '/product/getBaseBannerList', method: 'get' });
+
 

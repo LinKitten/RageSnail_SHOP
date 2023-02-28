@@ -1,5 +1,5 @@
 // home模块的小仓库
-import {reqCategoryList} from '@/api'
+import {reqCategoryList,reqGetBannerList} from '@/api'
 // state：仓库存储数据的地方
 const state = {
     // state中数据默认初始值别乱写，服务器返回对象，服务器返回数组【根据接口返回值初始化】
@@ -9,6 +9,9 @@ const state = {
 const mutations = {
     CATEGORYLIST(state,categoryList){
         state.categoryList = categoryList
+    },
+    BANNERLIST(state,bannerList){
+        state.bannerList = bannerList
     }
 };
 // actions：处理actions，可以书写自己的业务逻辑也可以处理异步
@@ -20,7 +23,16 @@ const actions = {
         if (result.code==200) {
             commit('CATEGORYLIST',result.data)
         }
+    },
+    //获取首页轮播图数据
+    async getBannerList({commit}){
+        let result = await reqGetBannerList()
+        if(result.code ===  200){
+            commit("BANNERLIST",result.data)
+        }
     }
+
+    
 };
 // getters:理解为计算属性，用于简化仓库数据，让组件获取仓库的数据更方便
 const getters = {};
