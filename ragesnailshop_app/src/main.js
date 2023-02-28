@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import App from './App.vue'
 
+//引入mock插件
+// mock用来拦截前端ajax请求，返回我么们自定义的数据用于测试前端接口。
+import '@/mock/mockServer'
+
 // 组成全局组件
 // 三级联动组件 -----全局组件
 import TypeNav from '@/components/TypeNav'
