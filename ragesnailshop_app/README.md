@@ -144,7 +144,77 @@ http://localhost:8080/#/search?k=ABC
 vuex是官方提供一个插件，状态管理库，集中式管理项目中组件共用的数据.
 (切记：并不是全部项目都需要vuex，)
 
+### 面试题
 
+> 路由传递参数（对象写法）path是否可以结合params参数一起使用？
+
+​	使用对象写法时可以是name、path形式，但是需要注意的是，path这种写法不能与params参数一起使用
+
+​	所以我们一般使用name这种写法。
+
+如何指定params可传可不传？
+
+> 情景：配置路由的时候，使用params进行占位，路由跳转的时候没传递
+>
+
+结果：路径会出现问题
+
+解决：可以在params配置的时候在后边加一个？(代表着参数可传可不传)
+
+例如：path: '/search/:keyword?',
+
+> params可以传递也可以不传递，到那时如果传递的是空串，如何解决?
+>
+
+解决：使用undefined解决，params可以传，可以不传
+
+例如：this.$router.push({name:'search',params:{keyword:''||undefined}})
+
+> 路由跳转能不能传递props？
+>
+
+回答：可以
+
+代码：
+
+```js
+router/index.js
+
+// 布尔写法
+{
+   path: '/search/:keyword',
+   component: Search,
+   meta: {
+       show: true,
+   },
+   name: 'search',
+   props:true
+}
+// 对象写法
+{
+   props:{a:1,b:2}
+}
+// 函数写法（常用）
+props:($route) => {
+    return {
+        keyword:$route.params.keyword,
+        k:$route.query.k
+    }
+}
+Search.vue/index.vue
+
+// 布尔写法
+// 注意：这里使用props只能传递params，
+{
+    props:['keyword']
+}
+// 对象写法
+{
+    props:['a','b']
+}
+// 函数写法
+props:['keyword','k']
+```
 
 
 
