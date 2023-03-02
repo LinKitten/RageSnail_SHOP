@@ -1,5 +1,6 @@
 import Mock from 'mockjs'
 //webpack默认对外暴露：json、图片
+// 导入两个json文件【JSON数据格式不需要对外暴露，但是可以引入】
 import banner from './banner.json'
 import floor from './floor.json'
 
