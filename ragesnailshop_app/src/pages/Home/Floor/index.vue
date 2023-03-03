@@ -24,24 +24,24 @@
                             <img :src="floor.imgUrl" />
                         </div>
                         <div class="floorBanner">
-                            <Carsousel :list="floor.carouselList" />
+                            <Carousel :carouselList="list.carouselList"/>
                             <!-- <div class="swiper-container" id="floor1Swiper">
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide">
                                         <img src="./images/floor-1-b01.png">
-                                    </div> -->
-                            <!-- <div class="swiper-slide">
+                                    </div>
+                            <div class="swiper-slide">
                                         <img src="./images/floor-1-b02.png">
                                     </div>
                                     <div class="swiper-slide">
                                         <img src="./images/floor-1-b03.png">
-                                    </div> -->
-                            <!-- </div> -->
-                            <!-- 如果需要分页器 -->
-                            <!-- <div class="swiper-pagination"></div> -->
+                                    </div>
+                            </div>
+                            如果需要分页器
+                            <div class="swiper-pagination"></div>
 
-                            <!-- 如果需要导航按钮 -->
-                            <!-- <div class="swiper-button-prev"></div>
+                            如果需要导航按钮
+                            <div class="swiper-button-prev"></div>
                                 <div class="swiper-button-next"></div>
                             </div> -->
 
