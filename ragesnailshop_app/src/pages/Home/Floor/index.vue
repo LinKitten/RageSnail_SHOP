@@ -35,55 +35,54 @@
                     <div class="floor-1">
                         <div class="blockgary">
                             <ul class="jd-list">
-                                <li>节能补贴</li>
-                                <li>4K电视</li>
-                                <li>空气净化器</li>
-                                <li>IH电饭煲</li>
-                                <li>滚筒洗衣机</li>
-                                <li>电热水器</li>
+                                <li v-for="(keyword, index) in floor.keywords" :key="index">
+                                    {{ keyword }}
+                                </li>
                             </ul>
-                            <img src="./images/floor-1-1.png" />
+                            <img :src="floor.imgUrl" />
                         </div>
                         <div class="floorBanner">
-                            <div class="swiper-container" id="floor1Swiper">
+                            <Carsousel :list="floor.carouselList" />
+                            <!-- <div class="swiper-container" id="floor1Swiper">
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide">
                                         <img src="./images/floor-1-b01.png">
-                                    </div>
-                                    <!-- <div class="swiper-slide">
+                                    </div> -->
+                            <!-- <div class="swiper-slide">
                                         <img src="./images/floor-1-b02.png">
                                     </div>
                                     <div class="swiper-slide">
                                         <img src="./images/floor-1-b03.png">
                                     </div> -->
-                                </div>
-                                <!-- 如果需要分页器 -->
-                                <div class="swiper-pagination"></div>
+                            <!-- </div> -->
+                            <!-- 如果需要分页器 -->
+                            <!-- <div class="swiper-pagination"></div> -->
 
-                                <!-- 如果需要导航按钮 -->
-                                <div class="swiper-button-prev"></div>
+                            <!-- 如果需要导航按钮 -->
+                            <!-- <div class="swiper-button-prev"></div>
                                 <div class="swiper-button-next"></div>
-                            </div>
+                            </div> -->
+
                         </div>
                         <div class="split">
                             <span class="floor-x-line"></span>
                             <div class="floor-conver-pit">
-                                <img src="./images/floor-1-2.png" />
+                                <img :src="floor.recommendList[0]" />
                             </div>
                             <div class="floor-conver-pit">
-                                <img src="./images/floor-1-3.png" />
+                                <img :src="floor.recommendList[1]" />
                             </div>
                         </div>
                         <div class="split center">
-                            <img src="./images/floor-1-4.png" />
+                            <img :src="floor.bigImg" />
                         </div>
                         <div class="split">
                             <span class="floor-x-line"></span>
                             <div class="floor-conver-pit">
-                                <img src="./images/floor-1-5.png" />
+                                <img :src="floor.recommendList[2]" />
                             </div>
                             <div class="floor-conver-pit">
-                                <img src="./images/floor-1-6.png" />
+                                <img :src="floor.recommendList[3]" />
                             </div>
                         </div>
                     </div>
@@ -91,12 +90,57 @@
             </div>
         </div>
     </div>
-
 </template>
 
 <script>
 export default {
-    name: "Floor"
+    name: "Floor",
+    //子组件通过props属性接受父组件传递的数据
+    props: ['floor'],
+    //问题:组件Floor的结构是否在mounted这里完整的!!!
+    //floor数据props：父组件给的,从来没有发生过变化. 父亲给数据->儿子接受数据->渲染结构->mounted
+    //初始化Swiper类的实例
+    // var mySwiper = new Swiper(this.$refs.floor1Swiper, {
+    //   //设置轮播图防线
+    //   direction: "horizontal",
+    //   //开启循环模式
+    //   loop: true,
+    //   // 如果需要分页器
+    //   pagination: {
+    //     el: ".swiper-pagination",
+    //     //分页器类型
+    //     type: "bullets",
+    //     //点击分页器，切换轮播
+    //     clickable: true,
+    //   },
+    //   //自动轮播
+    //   autoplay: {
+    //     delay: 1000,
+    //     //新版本的写法：目前是5版本
+    //     // pauseOnMouseEnter: true,
+    //     //如果设置为true，当切换到最后一个slide时停止自动切换
+    //     stopOnLastSlide: true,
+    //     //用户操作swiper之后，是否禁止autoplay
+    //     disableOnInteraction: false,
+    //   },
+    //   // 如果需要前进后退按钮
+    //   navigation: {
+    //     nextEl: ".swiper-button-next",
+    //     prevEl: ".swiper-button-prev",
+    //   },
+    //   //切换效果
+    //   // effect: "cube",
+    // });
+    // //1:swiper插件,对外暴露一个Swiper构造函数
+    // //2:Swiper构造函数需要传递参数 1、结构总根节点CSS选择器|根节点真实DOM节点  2、轮播图配置项
+    // //鼠标进入停止轮播
+    // mySwiper.el.onmouseover = function () {
+    //   mySwiper.autoplay.stop();
+    // };
+    // //鼠标离开开始轮播
+    // mySwiper.el.onmouseout = function () {
+    //   mySwiper.autoplay.start();
+    // };
 }
 </script>
 

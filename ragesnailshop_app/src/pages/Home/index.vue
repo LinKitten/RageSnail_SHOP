@@ -2,21 +2,21 @@
   <div>
     <!--三级联动全局组件 （在main.js注册为全局组件，因此不用引入） -->
     <!-- 商品分类导航 -->
-    <TypeNav/>
+    <TypeNav />
 
     <!-- 列表 -->
     <ListContainer />
     <!-- 今日推荐 -->
     <Recommend />
     <!-- 商品排行 -->
-    <Rank/>
+    <Rank />
     <!--猜你喜欢 -->
-    <Like/>
+    <Like />
     <!-- 楼层 -->
-    <Floor/>
-    <Floor/>
+    <!--  父组件通过自定义属性list给子组件传递数据-->
+    <Floor v-for="floor in floorList" :key="floor.id" :list="floor" />
     <!-- 商标 -->
-    <Brand/>
+    <Brand />
 
   </div>
 </template>
@@ -30,6 +30,7 @@ import Like from "@/pages/Home/Like"
 import Floor from "@/pages/Home/Floor"
 import Brand from "@/pages/Home/Brand"
 
+import { mapState } from 'vuex';
 export default {
   name: "Home",
   components: {
@@ -41,11 +42,14 @@ export default {
     Brand,
   },
   mounted() {
-    
+
+  },
+  computed: {
+    ...mapState({
+      floorList: (state) => state.home.floorList,
+    }),
   },
 }
 </script>
 
-<style>
-
-</style>
+<style></style>
