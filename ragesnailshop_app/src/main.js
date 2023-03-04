@@ -5,12 +5,12 @@ import App from './App.vue'
 // mock用来拦截前端ajax请求，返回我么们自定义的数据用于测试前端接口。
 import '@/mock/mockServer'
 // 引入swiper
-import 'swiper/css/swiper.css';
+import 'swiper/swiper.css';
 
 // 组成全局组件
 // 三级联动组件 -----全局组件
 import TypeNav from '@/components/TypeNav'
-import Carousel from '@/components/Carsousel';
+import Carousel from '@/components/Carousel';
 // 第一个参数：全局组件的名字 第二个参数：哪一个组件
 Vue.component(TypeNav.name,TypeNav)
 Vue.component(Carousel.name,Carousel)

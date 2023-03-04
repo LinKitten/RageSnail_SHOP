@@ -1,7 +1,7 @@
 <template>
     <div class="swiper-container" ref="cur" id="floor1Swiper">
         <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="(carouse) in carouselList" :key="carouse.id">
+            <div class="swiper-slide" v-for="carouse in carouselList" :key="carouse.id">
                 <img :src="carouse.imgUrl">
             </div>
         </div>
