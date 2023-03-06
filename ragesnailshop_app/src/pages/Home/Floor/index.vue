@@ -24,7 +24,7 @@
                             <img :src="floor.imgUrl" />
                         </div>
                         <div class="floorBanner">
-                            <Carousel :carouselList="list.carouselList"/>
+                            <Carousel :carouselList="list.carouselList" />
                             <!-- <div class="swiper-container" id="floor1Swiper">
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide">
