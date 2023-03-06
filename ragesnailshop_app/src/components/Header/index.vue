@@ -118,6 +118,14 @@ export default {
            console.log(this.$router);
         },
     },
+    mounted() {
+  //  组件挂载时就监听clear事件，clear事件在search模块中定义
+  //  当删除关键字面包屑时，触发该事件，同时header的输入框绑定的keyword要删除
+    this.$bus.$on("clear",()=>{
+      this.keyword = ''
+    })
+  },
+
 };
 </script>
 

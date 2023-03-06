@@ -21,6 +21,12 @@ import router from "@/router"
 // 引入仓库
 import store from '@/store'
 new Vue({
+   //全局事件总线$bus配置
+   beforeCreate() {
+    //此处的this就是这个new Vue()对象
+    //网络有很多bus通信总结，原理相同，换汤不换药
+    Vue.prototype.$bus = this
+  },
   render: h => h(App),
   //注册路由
   //当这里书写router的时候，组件身上都拥有了$route,$router属性 
