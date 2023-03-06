@@ -1,5 +1,6 @@
 // 当前模块：API进行统一管理
 import requests from "./request";
+import mockRequests from './mockAjax';
 
 // 三级联动接口 
 /* 
@@ -13,6 +14,10 @@ export const reqCategoryList = () => requests({ url: '/product/getBaseCategoryLi
         method:'get',
     }) */
 
-export const reqGetBannerList = () => requests({ url: '/product/getBaseBannerList', method: 'get' });
+// export const reqGetBannerList = () => requests({ url: '/product/getBaseBannerList', method: 'get' });
+export const reqGetBannerList = () => mockRequests.get('/banner');
 
+// 获取搜索模块数据
+export const reqGetSearchInfo = (params) =>
+  requests({ url: '/list', method: 'post', data: params || {} });
 
